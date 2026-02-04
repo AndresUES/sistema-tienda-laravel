@@ -18,6 +18,140 @@
                 </div>
             </div>
 
+            <!-- Modulo de Usuarios -->
+            <div class="hidden sm:flex sm:items-center sm:ms-6">
+        <x-dropdown align="left" width="48">
+    <x-slot name="trigger">
+        <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 hover:text-gray-700">
+            Usuarios
+            <svg class="ms-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+        </button>
+    </x-slot>
+
+    <x-slot name="content">
+        <x-dropdown-link :href="route('users.index')" :active="request()->routeIs('users.*')">
+            Listar Usuarios
+        </x-dropdown-link>
+
+        <x-dropdown-link :href="route('users.create')" :active="request()->routeIs('users.*')">
+            Crear Usuario
+        </x-dropdown-link>
+    </x-slot>
+</x-dropdown>
+        </div>
+
+<!-- Modulo de Productos -->
+<div class="hidden sm:flex sm:items-center sm:ms-6">
+<x-dropdown align="left" width="48">
+    <x-slot name="trigger">
+        <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 hover:text-gray-700">
+            Productos
+            <svg class="ms-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+        </button>
+    </x-slot>
+
+    <x-slot name="content">
+        <x-dropdown-link href="#">
+            Listar Productos
+        </x-dropdown-link>
+
+        <x-dropdown-link href="#">
+            Crear Producto
+        </x-dropdown-link>
+
+        <x-dropdown-link href="#">
+            Administrar Categorías
+        </x-dropdown-link>
+
+        <x-dropdown-link href="#">
+            Administrar Marcas
+        </x-dropdown-link>
+    </x-slot>
+</x-dropdown>
+</div>
+
+<!-- Modulo de ventas-->
+<div class="hidden sm:flex sm:items-center sm:ms-6">
+<x-dropdown align="left" width="48">
+    <x-slot name="trigger">
+        <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 hover:text-gray-700">
+            Ventas
+            <svg class="ms-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+        </button>
+    </x-slot>
+
+    <x-slot name="content">
+        <x-dropdown-link href="#">
+            Nueva Venta
+        </x-dropdown-link>
+
+        <x-dropdown-link href="#">
+            Historial de Ventas
+        </x-dropdown-link>
+    </x-slot>
+</x-dropdown>
+        </div>
+
+        <!-- modulo de compras -->
+        <div class="hidden sm:flex sm:items-center sm:ms-6">
+            <x-dropdown align="left" width="48">
+    <x-slot name="trigger">
+        <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 hover:text-gray-700">
+            Compras
+            <svg class="ms-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+        </button>
+    </x-slot>
+
+    <x-slot name="content">
+        <x-dropdown-link href="#">
+            Nueva Compra
+        </x-dropdown-link>
+
+        <x-dropdown-link href="#">
+            Historial de Compras
+        </x-dropdown-link>
+
+        <x-dropdown-link href="#">
+            Proveedores
+        </x-dropdown-link>
+    </x-slot>
+</x-dropdown>
+
+        </div>
+        <!-- modulo de Reportes -->
+        <div class="hidden sm:flex sm:items-center sm:ms-6">
+            <x-dropdown align="left" width="48">
+    <x-slot name="trigger">
+        <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 hover:text-gray-700">
+            Reportes
+            <svg class="ms-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+        </button>
+    </x-slot>
+
+    <x-slot name="content">
+        <x-dropdown-link href="#">
+            Kardex
+        </x-dropdown-link>
+
+        <x-dropdown-link href="#">
+            Cortes de Caja
+        </x-dropdown-link>
+    </x-slot>
+</x-dropdown>
+
+        </div>
+
+
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
@@ -71,6 +205,84 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>
+
+        <!-- Usuarios -->
+<div class="pt-2 pb-3 space-y-1 border-t border-gray-200">
+    <div class="px-4 text-xs text-gray-400">USUARIOS</div>
+
+    <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+        Listar Usuarios
+    </x-responsive-nav-link>
+
+    <x-responsive-nav-link :href="route('users.create')" :active="request()->routeIs('users.create')">
+        Crear Usuario
+    </x-responsive-nav-link>
+</div>
+
+<!-- Productos -->
+<div class="pt-2 pb-3 space-y-1 border-t border-gray-200">
+    <div class="px-4 text-xs text-gray-400">PRODUCTOS</div>
+
+    <x-responsive-nav-link href="#">
+        Listar Productos
+    </x-responsive-nav-link>
+
+    <x-responsive-nav-link href="#">
+        Crear Producto
+    </x-responsive-nav-link>
+
+    <x-responsive-nav-link href="#">
+        Administrar Categorías
+    </x-responsive-nav-link>
+
+    <x-responsive-nav-link href="#">
+        Administrar Marcas
+    </x-responsive-nav-link>
+</div>
+
+<!-- Ventas -->
+<div class="pt-2 pb-3 space-y-1 border-t border-gray-200">
+    <div class="px-4 text-xs text-gray-400">VENTAS</div>
+
+    <x-responsive-nav-link href="#">
+        Nueva Venta
+    </x-responsive-nav-link>
+
+    <x-responsive-nav-link href="#">
+        Historial de Ventas
+    </x-responsive-nav-link>
+</div>
+
+<!-- Compras -->
+<div class="pt-2 pb-3 space-y-1 border-t border-gray-200">
+    <div class="px-4 text-xs text-gray-400">COMPRAS</div>
+
+    <x-responsive-nav-link href="#">
+        Nueva Compra
+    </x-responsive-nav-link>
+
+    <x-responsive-nav-link href="#">
+        Historial de Compras
+    </x-responsive-nav-link>
+
+    <x-responsive-nav-link href="#">
+        Proveedores
+    </x-responsive-nav-link>
+</div>
+
+<!-- Reportes -->
+<div class="pt-2 pb-3 space-y-1 border-t border-gray-200">
+    <div class="px-4 text-xs text-gray-400">REPORTES</div>
+
+    <x-responsive-nav-link href="#">
+        Kardex
+    </x-responsive-nav-link>
+
+    <x-responsive-nav-link href="#">
+        Cortes de Caja
+    </x-responsive-nav-link>
+</div>
+
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">

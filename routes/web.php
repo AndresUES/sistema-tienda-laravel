@@ -21,8 +21,13 @@ Route::middleware('auth')->group(function () {
 
 /* Rutas para el módulo de Usuarios */
 Route::middleware(['auth'])->group(function () {
-    Route::resource('users', UserController::class);
-    Route::get('users/{id}/restore', [UserController::class, 'restore'])->name('users.restore');
+    // 1. Ruta de restaurar (tipo POST) y colocada ANTES del resource
+    Route::post('users/{id}/restore', [UserController::class, 'restore'])->name('users.restore');
+    
+    // 2. Rutas estándar (resource)
+    Route::resource('users', UserController::class)->parameters([
+    'users' => 'id'
+]);
 });
 
 require __DIR__.'/auth.php';

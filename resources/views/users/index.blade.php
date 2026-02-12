@@ -55,7 +55,7 @@
 
         @if(!$user->trashed())
             <a href="{{ route('users.edit', $user->id) }}"
-               class="inline-block bg-gray-600 text-black text-xs px-3 py-2 rounded hover:bg-gray-700">
+               class="inline-block bg-gray-600 text-white text-xs px-3 py-2 rounded hover:bg-gray-700">
                 Editar
             </a>
         @endif
@@ -64,7 +64,7 @@
             <form action="{{ route('users.restore', $user->id) }}" method="POST">
                 @csrf
                 <button type="submit"
-                        class="bg-green-600 text-black text-xs px-3 py-2 rounded hover:bg-green-700">
+                        class="bg-green-600 text-white text-xs px-3 py-2 rounded hover:bg-green-700">
                     Restaurar
                 </button>
             </form>

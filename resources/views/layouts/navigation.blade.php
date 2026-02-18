@@ -55,19 +55,19 @@
     </x-slot>
 
     <x-slot name="content">
-        <x-dropdown-link href="#">
+        <x-dropdown-link href="{{ route('productos.index') }}">
             Listar Productos
         </x-dropdown-link>
 
-        <x-dropdown-link href="#">
+        <x-dropdown-link href="{{ route('productos.create') }}">
             Crear Producto
         </x-dropdown-link>
 
-        <x-dropdown-link href="#">
+        <x-dropdown-link href="{{ route('categorias.index') }}">
             Administrar Categorías
         </x-dropdown-link>
 
-        <x-dropdown-link href="#">
+        <x-dropdown-link href="{{ route('marcas.index') }}">
             Administrar Marcas
         </x-dropdown-link>
     </x-slot>

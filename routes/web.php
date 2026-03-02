@@ -6,6 +6,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\ProveedorController;
+use App\Http\Controllers\CompraController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +55,14 @@ Route::middleware('auth')->group(function () {
     // --- Módulo de Productos ---
     // Esto genera automáticamente las rutas: productos.index, productos.create, etc.
     Route::resource('productos', ProductoController::class);
+
+    // --- Módulo de Proveedores ---
+    // Esto genera automáticamente las rutas: productos.index, productos.create, etc.
+    Route::resource('proveedores', ProveedorController::class);
+
+    // --- Módulo de Compras ---
+    // Esto genera automáticamente las rutas: compras.index, compras.create, etc.
+    Route::resource('compras', CompraController::class)->except(['edit', 'update', 'destroy']);
 
 });
 

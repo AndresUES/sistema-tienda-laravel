@@ -63,13 +63,11 @@ class ProveedorController extends Controller
     {
         $proveedor = Proveedor::findOrFail($id);
         
-        // Validación de integridad: No borrar si ya le compramos algo
-        // (Descomenta esto cuando tengas el modelo Compra funcionando)
-        /*
+        
         if($proveedor->compras()->count() > 0) {
             return back()->with('error', 'No se puede eliminar el proveedor porque tiene compras registradas.');
         }
-        */
+        
 
         $proveedor->delete();
         return back()->with('success', 'Proveedor eliminado.');

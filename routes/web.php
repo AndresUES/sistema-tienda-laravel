@@ -8,6 +8,8 @@ use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\CompraController;
+use App\Http\Controllers\VentaController;
+use App\Http\Controllers\ClienteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,6 +65,14 @@ Route::middleware('auth')->group(function () {
     // --- Módulo de Compras ---
     // Esto genera automáticamente las rutas: compras.index, compras.create, etc.
     Route::resource('compras', CompraController::class)->except(['edit', 'update', 'destroy']);
+
+    // --- Módulo de clientes ---
+    // Aquí puedes agregar las rutas para el módulo de clientes cuando lo implementes
+    Route::resource('clientes', ClienteController::class);
+
+    // --- Módulo de Ventas ---
+    // Aquí puedes agregar las rutas para el módulo de ventas cuando lo implementes
+    Route::resource('ventas', VentaController::class)->except(['edit', 'update', 'destroy']);
 
 });
 

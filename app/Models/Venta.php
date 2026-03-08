@@ -14,13 +14,13 @@ class Venta extends Model
     protected $fillable = [
         'cliente_id',
         'usuario_id',      
-        'numero_factura',  
+        'numero_factura',
         'fecha',
         'subtotal',
         'iva',
         'total',
-        'tipo_documento',  // CCF, FCF, TICKET
-        'estado',          // ACTIVA, ANULADA
+        'tipo_documento',
+        'estado',         
     ];
 
     public function cliente()

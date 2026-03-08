@@ -14,22 +14,20 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             
             @if(session('success'))
-                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
-                    <span class="block sm:inline">{{ session('success') }}</span>
+                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
+                    {{ session('success') }}
                 </div>
             @endif
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    
                     <div class="overflow-x-auto">
                         <table class="w-full text-sm text-left text-gray-500">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3">ID</th>
                                     <th scope="col" class="px-6 py-3">Fecha</th>
-                                    <th scope="col" class="px-6 py-3">Proveedor</th>
                                     <th scope="col" class="px-6 py-3">N° Factura</th>
+                                    <th scope="col" class="px-6 py-3">Proveedor</th>
                                     <th scope="col" class="px-6 py-3 text-right">Total</th>
                                     <th scope="col" class="px-6 py-3 text-center">Acciones</th>
                                 </tr>
@@ -37,10 +35,9 @@
                             <tbody>
                                 @forelse ($compras as $compra)
                                 <tr class="bg-white border-b hover:bg-gray-50">
-                                    <td class="px-6 py-4">{{ $compra->id }}</td>
                                     <td class="px-6 py-4">{{ \Carbon\Carbon::parse($compra->fecha)->format('d/m/Y') }}</td>
+                                    <td class="px-6 py-4 font-mono">{{ $compra->numero_factura }}</td>
                                     <td class="px-6 py-4 font-bold text-gray-900">{{ $compra->proveedor->nombre }}</td>
-                                    <td class="px-6 py-4">{{ $compra->numero_factura }}</td>
                                     <td class="px-6 py-4 text-right font-bold text-green-600">
                                         ${{ number_format($compra->total, 2) }}
                                     </td>

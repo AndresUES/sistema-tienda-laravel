@@ -20,12 +20,10 @@
                         </div>
                         <div class="text-right">
                             <p class="text-sm text-gray-500">
-                                <span class="font-bold">Fecha:</span> {{ \Carbon\Carbon::parse($compra->fecha)->format('d/m/Y') }}
+                                <span class="font-bold">Fecha de Compra:</span> 
+                                {{ \Carbon\Carbon::parse($compra->fecha)->format('d/m/Y') }}
                             </p>
-                            <p class="text-xs text-gray-400 mt-1">
-                                Registrado por: {{ $compra->usuario->name ?? 'Usuario' }}
-                            </p>
-                        </div>
+                            </div>
                     </div>
 
                     <div class="overflow-x-auto mb-6">

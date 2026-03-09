@@ -87,12 +87,16 @@
     </x-slot>
 
     <x-slot name="content">
-        <x-dropdown-link href="#">
+        <x-dropdown-link href="{{ route('ventas.create') }}">
             Nueva Venta
         </x-dropdown-link>
 
-        <x-dropdown-link href="#">
+        <x-dropdown-link href="{{ route('ventas.index') }}">
             Historial de Ventas
+        </x-dropdown-link>
+
+        <x-dropdown-link href="{{ route('clientes.index') }}">
+            Clientes
         </x-dropdown-link>
     </x-slot>
 </x-dropdown>
@@ -111,15 +115,15 @@
     </x-slot>
 
     <x-slot name="content">
-        <x-dropdown-link href="#">
+        <x-dropdown-link href="{{ route('compras.create') }}">
             Nueva Compra
         </x-dropdown-link>
 
-        <x-dropdown-link href="#">
+        <x-dropdown-link href="{{ route('compras.index') }}">
             Historial de Compras
         </x-dropdown-link>
 
-        <x-dropdown-link href="#">
+        <x-dropdown-link href="{{ route('proveedores.index') }}">
             Proveedores
         </x-dropdown-link>
     </x-slot>

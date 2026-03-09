@@ -7,6 +7,10 @@ use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\KardexController;
+use App\Http\Controllers\ProveedorController;
+use App\Http\Controllers\CompraController;
+use App\Http\Controllers\VentaController;
+use App\Http\Controllers\ClienteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +61,22 @@ Route::middleware('auth')->group(function () {
 
     // --- Módulo de Kardex ---
     Route::get('kardex', [KardexController::class, 'index'])->name('kardex.index');
+    // --- Módulo de Proveedores ---
+    // Esto genera automáticamente las rutas: productos.index, productos.create, etc.
+    Route::resource('proveedores', ProveedorController::class);
+
+    // --- Módulo de Compras ---
+    // Esto genera automáticamente las rutas: compras.index, compras.create, etc.
+    Route::resource('compras', CompraController::class)->except(['edit', 'update', 'destroy']);
+
+    // --- Módulo de clientes ---
+    // Aquí puedes agregar las rutas para el módulo de clientes cuando lo implementes
+    Route::resource('clientes', ClienteController::class);
+
+    // --- Módulo de Ventas ---
+    // Aquí puedes agregar las rutas para el módulo de ventas cuando lo implementes
+    Route::resource('ventas', VentaController::class)->except(['edit', 'update', 'destroy']);
+
 });
 
 require __DIR__.'/auth.php';

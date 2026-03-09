@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\KardexController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +55,8 @@ Route::middleware('auth')->group(function () {
     // Esto genera automáticamente las rutas: productos.index, productos.create, etc.
     Route::resource('productos', ProductoController::class);
 
+    // --- Módulo de Kardex ---
+    Route::get('kardex', [KardexController::class, 'index'])->name('kardex.index');
 });
 
 require __DIR__.'/auth.php';

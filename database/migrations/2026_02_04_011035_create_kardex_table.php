@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('kardex', function (Blueprint $table) {
     $table->id();
     $table->foreignId('producto_id')->constrained('productos');
-    $table->enum('tipo', ['COMPRA', 'VENTA', 'AJUSTE']);
+    $table->enum('tipo', ['COMPRA', 'VENTA', 'AJUSTE', 'DEVOLUCION_CLIENTE', 'DEVOLUCION_PROVEEDOR']);
     $table->integer('cantidad');
     $table->decimal('precio', 10, 2);
+    $table->integer('stock_anterior');
+    $table->integer('stock_nuevo');
     $table->date('fecha');
     $table->unsignedBigInteger('referencia_id')->nullable(); // id compra o venta
     $table->timestamps();

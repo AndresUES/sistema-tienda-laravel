@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Producto;
 use App\Models\Categoria;
 use App\Models\Marca;
+use App\Models\Kardex;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductoController extends Controller
 {
@@ -37,9 +39,28 @@ class ProductoController extends Controller
             'stock_minimo' => 'integer|min:0',
         ]);
 
-        Producto::create($request->all());
+        DB::transaction(function () use ($request) {
 
-        return redirect()->route('productos.index')->with('success', 'Producto creado exitosamente.');
+            $producto = Producto::create($request->all());
+
+            // si el stock inicial es mayor a 0 se registra en kardex
+            if ($producto->stock > 0) {
+
+                Kardex::create([
+                    'producto_id' => $producto->id,
+                    'tipo' => 'AJUSTE',
+                    'cantidad' => $producto->stock,
+                    'precio' => $producto->precio_compra,
+                    'stock_anterior' => 0,
+                    'stock_nuevo' => $producto->stock,
+                    'fecha' => now(),
+                    'referencia_id' => null
+                ]);
+            }
+        });
+
+        return redirect()->route('productos.index')
+            ->with('success', 'Producto creado y movimiento inicial registrado.');
     }
 
     public function edit($id)

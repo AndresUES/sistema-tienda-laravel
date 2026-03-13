@@ -5,13 +5,10 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            
-            @if(session('error'))
-                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-                    {{ session('error') }}
-                </div>
-            @endif
-
+            <div id="js-alerta-venta" class="hidden bg-orange-100 border border-orange-400 text-orange-700 px-4 py-3 rounded relative mb-4" role="alert">
+                <strong class="font-bold">¡Atención!</strong>
+                <span id="js-mensaje-venta" class="block sm:inline"></span>
+            </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <form action="{{ route('ventas.store') }}" method="POST">
@@ -179,10 +176,13 @@
             const stock = parseInt(document.getElementById('stock_display').value);
             const cantidad = parseInt(document.getElementById('input_cantidad').value);
 
-            if (!id) { alert("Seleccione un producto"); return; }
-            if (cantidad <= 0) { alert("Cantidad inválida"); return; }
+            if (!id) { Alerta.show("Por favor, selecciona un producto de la lista."); return; }
+            if (isNaN(cantidad) || cantidad <= 0) { 
+                Alerta.show("Ingresa una cantidad válida mayor a cero."); 
+                return; 
+            }
             if (cantidad > stock) { 
-                alert("¡Stock insuficiente! Solo quedan " + stock + " unidades."); 
+                Alerta.show("¡Stock insuficiente! Solo quedan " + stock + " unidades."); 
                 return; 
             }
 

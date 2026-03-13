@@ -143,7 +143,7 @@
     </x-slot>
 
     <x-slot name="content">
-        <x-dropdown-link href="#">
+        <x-dropdown-link href="{{ route('kardex.index') }}">
             Kardex
         </x-dropdown-link>
 

@@ -8,6 +8,7 @@ use App\Models\Producto;
 use App\Models\Proveedor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Kardex;
 
 class CompraController extends Controller
 {
@@ -59,6 +60,7 @@ class CompraController extends Controller
                 
                 $total_acumulado += $subtotal_linea;
 
+                // Guardar Detalle de Compra
                 DetalleCompra::create([
                     'compra_id' => $compra->id,
                     'producto_id' => $producto_id,
@@ -67,11 +69,26 @@ class CompraController extends Controller
                     'subtotal' => $subtotal_linea,
                 ]);
 
-                // 3. Actualizar Stock y Costo
+                // 1. OBTENER PRODUCTO Y CAPTURAR STOCK ANTERIOR
                 $producto = Producto::findOrFail($producto_id);
-                $producto->stock += $cantidad;
+                $stockAnterior = $producto->stock; // Guardamos el estado actual
+
+                // 2. ACTUALIZAR STOCK Y COSTO
+                $producto->stock += $cantidad; // Sumamos la entrada
                 $producto->precio_compra = $precio;
                 $producto->save();
+
+                // 3. REGISTRAR EN KARDEX
+                Kardex::create([
+                    'producto_id'    => $producto_id,
+                    'tipo'           => 'COMPRA',       // Identifica la entrada
+                    'cantidad'       => $cantidad,
+                    'precio'         => $precio,
+                    'stock_anterior' => $stockAnterior,
+                    'stock_nuevo'    => $producto->stock, // El stock ya actualizado
+                    'fecha'          => $request->fecha,  // Usamos la fecha de la factura
+                    'referencia_id'  => $compra->id,      // ID de la compra para auditoría
+                ]);
             }
 
             // 4. Totales

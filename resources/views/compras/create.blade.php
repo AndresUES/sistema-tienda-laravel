@@ -173,7 +173,7 @@
             const cantidad = parseInt(document.getElementById('input_cantidad').value);
 
             if(!id || !costo || !cantidad) {
-                alert("Verifique que seleccionó producto y tiene costo/cantidad");
+                Alerta.show("Verifique que seleccionó producto y tiene costo/cantidad");
                 return;
             }
 

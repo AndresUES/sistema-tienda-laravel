@@ -9,6 +9,7 @@ use App\Models\Cliente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Kardex;
 
 class VentaController extends Controller
 {
@@ -69,11 +70,13 @@ class VentaController extends Controller
             foreach ($request->productos_id as $index => $producto_id) {
                 $cantidad = $request->cantidades[$index];
                 
-                // Bloqueamos la fila para evitar ventas simultáneas del mismo stock
+                // Bloqueamos la fila para evitar ventas simultáneas
                 $producto = Producto::lockForUpdate()->find($producto_id);
 
-                // Validación estricta de Stock
-                if ($producto->stock < $cantidad) {
+                // 1. CAPTURAMOS EL STOCK ANTERIOR (Antes de restar)
+                $stockAnterior = $producto->stock;
+
+                if ($stockAnterior < $cantidad) {
                     throw new \Exception("Stock insuficiente para: " . $producto->nombre);
                 }
 
@@ -81,7 +84,7 @@ class VentaController extends Controller
                 $subtotal_linea = $cantidad * $precio_venta;
                 $total_acumulado += $subtotal_linea;
 
-                // Guardar Detalle
+                // Guardar Detalle de Venta
                 DetalleVenta::create([
                     'venta_id' => $venta->id,
                     'producto_id' => $producto_id,
@@ -90,9 +93,21 @@ class VentaController extends Controller
                     'subtotal' => $subtotal_linea,
                 ]);
 
-                // RESTAR STOCK
+                // 2. RESTAR STOCK
                 $producto->stock -= $cantidad;
                 $producto->save();
+
+                // 3. REGISTRAR EN KARDEX
+                Kardex::create([
+                    'producto_id'    => $producto_id,
+                    'tipo'           => 'VENTA', // Identificador del movimiento
+                    'cantidad'       => $cantidad,
+                    'precio'         => $precio_venta,
+                    'stock_anterior' => $stockAnterior,
+                    'stock_nuevo'    => $producto->stock, // El stock ya restado
+                    'fecha'          => now(),
+                    'referencia_id'  => $venta->id, // Guardamos el ID de la venta para rastreo
+                ]);
             }
 
             // 3. Totales
